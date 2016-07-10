@@ -1,4 +1,48 @@
-#! /bin/bash
-# My first script
+# !/bin/bash
 
-echo "Hello World"
+# Ouput info page
+
+# declare -r TITLE="Report generator $HOSTNAME" # No space, Declare constant
+
+TITLE="Report generator $HOSTNAME"
+CURRENT_TIME=$(date)
+TIME_STAMP="Generated $CURRENT_TIME, by $USER" 
+# TITLE="j"
+
+# echo "<HTML>
+# 	 		<HEAD>
+# 	 				<TITLE> $TITLE </TITLE>
+# 	 		<HEAD>
+# 	 		<BODY>
+# 	 				<H2>$TITLE</H2>
+# 	 				<P>$TIME_STAMP</P>
+# 	 		<BODY>
+# 	 <HTML>"
+
+report_uptime(){
+	return
+}
+
+report_disk_space(){
+	return
+}
+
+report_home_space(){
+	return
+}
+
+cat <<_EOF_
+<HTML>
+	 		<HEAD>
+	 				<TITLE> $TITLE </TITLE>
+	 		<HEAD>
+	 		<BODY>
+	 				<H2>$TITLE</H2>
+	 				<P>$TIME_STAMP</P>
+	 				$(report_uptime)
+	 				$(report_disk_space)
+	 				$(report_home_space)
+	 		<BODY>
+<HTML>
+_EOF_
+
