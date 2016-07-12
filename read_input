@@ -1,0 +1,68 @@
+#!/bin/bash
+
+# Chap 30 Read-Menu
+
+function invalid_input ()
+{
+	echo "Invalid input..."
+	exit 1
+}
+
+function one()
+{
+	echo "One function"
+	exit 0
+}
+
+function two()
+{
+	echo "Two function"
+	exit 0
+}
+
+function three()
+{
+	echo "Three function"
+	exit 0
+}
+
+echo "
+Please Select :
+
+1. System Info
+2. Disk Space
+3. Home Space
+0. Quit
+"
+
+read -p "Enter your input : " input
+
+[[ -z $input ]] && invalid_input
+
+(( $(echo $input | wc -w) > 1)) && invalid_input
+
+if [[ $input =~ ^[0-3]$ ]]; then
+ 	if [[ $input == 0 ]]; then
+ 		echo "Terminated.."
+ 		exit 0	
+ 	fi
+
+ 	if [[ $input == 1 ]]; then
+ 		echo "One"
+ 		one
+ 	fi
+
+ 	if [[ $input == 2 ]]; then
+ 		echo "Two"
+ 		two
+ 	fi
+
+ 	if [[ $input == 3 ]]; then
+ 		echo "Three"
+ 		three
+ 	fi
+
+else
+	echo "Invalid ..."
+	exit 1
+fi 
