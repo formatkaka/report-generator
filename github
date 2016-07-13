@@ -1,0 +1,100 @@
+#!/bin/bash
+
+### List of colours
+Black='\033[0;30m'        # Black
+Red='\033[0;31m'          # Red
+Green='\033[0;32m'        # Green
+Yellow='\033[0;33m'       # Yellow
+Blue='\033[0;34m'         # Blue
+Purple='\033[0;35m'       # Purple
+Cyan='\033[0;36m'         # Cyan
+White='\033[0;37m'        # White
+Color_Off='\033[0m'
+
+printf "${Green}Hello $USER. Welcome to github automation script${Color_Off}\n"
+
+declare -a repo_list
+
+echo "File readying..."
+
+# $(find /home/$USER -name ".git" > repo_file)
+
+echo "File updated..."
+
+repo_list=( `cat "repo_file" ` )
+
+
+# echo -e "Blah\n"
+# for (( i = 0; i < $j; i++ )); do
+# 	printf "${repo_list[i]}"
+# done
+
+function print_repo_list()
+{
+	for (( i = 0; i < "${#repo_list[@]}"; i++ )); do
+		echo "$((i+1))" "${repo_list[i]}"
+	done	
+}
+
+function view_change_files()
+{
+	echo "Changes...."
+}
+
+function commit_changes()
+{
+	echo "Commiting changes..."
+}
+
+# echo "0. Terminate"
+
+function invalid_input()
+{
+	echo "Invalid input......"
+	exit 1
+}
+
+function start_screen()
+{
+	echo "
+1. View git files
+2. View changed files
+3. Commit all files
+0. Terminate 
+	"
+	# echo 
+	read -p "Enter your input : " input
+
+	[[ -z $input ]] && invalid_input
+
+	(( $(echo $input | wc -w ) > 1 )) && invalid_input
+
+	if [[ $input =~ ^[0-3]$ ]]
+	then
+		return "$input"
+	else
+		invalid_input
+	fi
+	# return "$input" 
+}
+
+
+function main()
+{
+	echo "in main"
+	start_screen
+	input=$? 
+	
+	if [[ $input == 1 ]]; then
+		print_repo_list
+	elif [[ $input == 2 ]]; then
+		view_change_files
+	elif [[ $input == 3 ]]; then
+		commit_changes
+	else
+		echo "Terminated"
+		exit 0
+	fi
+}
+
+main
