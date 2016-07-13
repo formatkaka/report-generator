@@ -38,7 +38,10 @@ function print_repo_list()
 
 function view_change_files()
 {
-	echo "Changes...."
+	for (( i = 0; i < "${#repo_list[@]}"; i++ )); do
+		$(cd "${repo_list[i]}")
+		echo "${git status}"
+	done
 }
 
 function commit_changes()
